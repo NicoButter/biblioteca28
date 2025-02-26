@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Biblioteca 28 de Noviembre</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/login_styles.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h3>Iniciar Sesión</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_username">Nombre de Usuario</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+            <div>
+                <label for="id_password">Contraseña</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+            <button type="submit" class="btn-primary">Iniciar Sesión</button>
+        </form>
+        {% if form.errors %}
+        <div class="alert-danger">
+            <p>Tu nombre de usuario o contraseña son incorrectos. Por favor, inténtalo de nuevo.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer con información institucional -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Enlaces a la izquierda -->
+            <div class="footer-links">
+                <p>
+                    <a href="/terminos-y-condiciones" style="color: #007bff; text-decoration: none;">Términos y Condiciones</a> |
+                    <a href="/politica-de-privacidad" style="color: #007bff; text-decoration: none;">Política de Privacidad</a>
+                </p>
+            </div>
+    
+            <!-- Texto centrado -->
+            <div class="footer-text">
+                <p>Biblioteca 28 de Noviembre</p>
+                <p>Honorable Cámara de Diputados de la Provincia de Santa Cruz</p>
+                <p>2025 &#x2184; Todos los derechos reservados</p>
+            </div>
+    
+            <!-- Logo a la derecha -->
+            <div class="footer-logo">
+                <img src="{% static 'accounts/images/logo.png' %}" alt="Logo" style="width: 50px;">
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

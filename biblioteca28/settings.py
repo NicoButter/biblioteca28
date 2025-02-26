@@ -129,7 +129,13 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'accounts.Usuario'
 
-STATIC_URL = "static/"
+# Directorio para archivos estáticos
+STATIC_URL = '/static/'
+
+# Directorios donde Django buscará archivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'apps/accounts/static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

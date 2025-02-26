@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px; 
+    padding: 10px 0;
+    font-size: 14px;
+    color: #6c757d; 
+    background-color: #f8f9fa; 
+    border-top: 1px solid #e9ecef; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Contenedor principal del footer */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Enlaces a la izquierda */
+.footer-links {
+    flex: 1;
+    text-align: right;
+}
+
+.footer-links a:hover {
+    color: #0d6efd; 
+    text-decoration: underline; 
+
+/* Texto centrado */
+.footer-text {
+    flex: 2;
+    text-align: center;
+}
+
+/* Logo a la derecha */
+.footer-logo {
+    flex: 1;
+    text-align: left;
+}
+
+@media (max-width: 600px) {
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        font-size: 14px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links,
+    .footer-text,
+    .footer-logo {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}

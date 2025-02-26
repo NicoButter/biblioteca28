@@ -65,14 +65,22 @@ body {
 /* Footer */
 .footer {
     text-align: center;
-    margin-top: 40px; 
+    margin-top: 40px;
     padding: 10px 0;
     font-size: 14px;
-    color: #6c757d; 
-    background-color: #f8f9fa; 
-    border-top: 1px solid #e9ecef; 
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
     position: fixed;
     bottom: 0;
+    width: 100%;
+}
+
+/* Contenedor principal del footer */
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 10px 0;
     width: 100%;
 }
 
@@ -86,15 +94,11 @@ body {
     padding: 0 20px;
 }
 
-/* Enlaces a la izquierda */
-.footer-links {
+/* Logo a la izquierda */
+.footer-logo {
     flex: 1;
-    text-align: right;
+    text-align: left;
 }
-
-.footer-links a:hover {
-    color: #0d6efd; 
-    text-decoration: underline; 
 
 /* Texto centrado */
 .footer-text {
@@ -102,11 +106,12 @@ body {
     text-align: center;
 }
 
-/* Logo a la derecha */
-.footer-logo {
+/* Enlaces a la derecha */
+.footer-links {
     flex: 1;
-    text-align: left;
+    text-align: right;
 }
+
 
 @media (max-width: 600px) {
     .login-container {

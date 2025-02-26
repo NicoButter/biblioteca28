@@ -33,12 +33,9 @@
     <!-- Footer con información institucional -->
     <footer class="footer">
         <div class="footer-content">
-            <!-- Enlaces a la izquierda -->
-            <div class="footer-links">
-                <p>
-                    <a href="/terminos-y-condiciones" style="color: #007bff; text-decoration: none;">Términos y Condiciones</a> |
-                    <a href="/politica-de-privacidad" style="color: #007bff; text-decoration: none;">Política de Privacidad</a>
-                </p>
+            <!-- Logo a la izquierda -->
+            <div class="footer-logo">
+                <img src="{% static 'accounts/images/logo.png' %}" alt="Logo" style="width: 50px;">
             </div>
     
             <!-- Texto centrado -->
@@ -48,9 +45,12 @@
                 <p>2025 &#x2184; Todos los derechos reservados</p>
             </div>
     
-            <!-- Logo a la derecha -->
-            <div class="footer-logo">
-                <img src="{% static 'accounts/images/logo.png' %}" alt="Logo" style="width: 50px;">
+            <!-- Enlaces a la derecha -->
+            <div class="footer-links">
+                <p>
+                    <a href="/terminos-y-condiciones" style="color: #007bff; text-decoration: none;">Términos y Condiciones</a> |
+                    <a href="/politica-de-privacidad" style="color: #007bff; text-decoration: none;">Política de Privacidad</a>
+                </p>
             </div>
         </div>
     </footer>

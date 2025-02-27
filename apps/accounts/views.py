@@ -9,7 +9,12 @@ def custom_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home') 
+            if user.rol == 'admin':
+                return redirect('admin_dashboard')
+            elif user.rol == 'empleado':
+                return redirect('employee_dashboard')
+            elif user.rol == 'jefe_turno':
+                return redirect('shift_leader_dashboard')
         else:
-            messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+            return render(request, 'accounts/login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'accounts/login.html')

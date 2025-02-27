@@ -23,4 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', custom_login, name='home'),
     path('accounts/', include('apps.accounts.urls')),
+    path('dashboard/', include('apps.dashboards.urls')), 
 ]

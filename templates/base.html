@@ -9,13 +9,15 @@
     <title>{% block title %}Biblioteca 28 de Noviembre{% endblock %}</title>
     
     <link rel="stylesheet" href="{% static 'css/base_styles.css' %}">
+    {% block extra_style %}{% endblock %}
+    
 </head>
 <body>
     <header>
-        <h1>Bienvenido a la Biblioteca 28 de Noviemrbe</h1>
+        <h1>Bienvenido a la Biblioteca 28 de Noviembre</h1>
         <nav>
             <a href="{% url 'home' %}">Inicio</a>
-            <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            {% comment %} <a href="{% url 'logout' %}">Cerrar Sesión</a> {% endcomment %}
         </nav>
     </header>
     <main>

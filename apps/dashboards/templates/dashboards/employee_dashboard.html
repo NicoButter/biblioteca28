@@ -1,6 +1,37 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'css/employee_dashboard.css' %}">
+{% endblock %}
+
 {% block content %}
+
 <h1>Bienvenido, Empleado</h1>
-<p>Este es el dashboard para empleados.</p>
+<p>Selecciona una opción:</p>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Cargar Libro</h5>
+                <p class="card-text">Agrega un nuevo libro a la biblioteca.</p>
+                <a href="{% url 'add_book' %}" class="btn btn-primary">Ir a Cargar Libro</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Cargar Periódico</h5>
+                <p class="card-text">Agrega un nuevo periódico a la biblioteca.</p>
+                <a href="{% url 'add_newspaper' %}" class="btn btn-success">Ir a Cargar Periódico</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

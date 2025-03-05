@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import sys
 import os
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -25,12 +27,12 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-hpqbrg77p##_yv$%qr6it3mkxq(3^4crv4v!7q%m&*%aw7sklc"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 
 # Application definition
@@ -83,16 +85,15 @@ WSGI_APPLICATION = "biblioteca28.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
- 'default': {
+   'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'biblioteca28_db',         
-        'USER': 'biblioteca28',
-        'PASSWORD': 'biblioteca28010203',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': config("DB_HOST", default="localhost"),
+        'PORT': config("DB_PORT", default="5432"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -1,0 +1,36 @@
+# Archivos de entorno y configuraciones sensibles
+.env
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+
+# Base de datos SQLite (si usas PostgreSQL o MySQL, no es necesario)
+db.sqlite3
+*.sqlite3
+
+# Archivos de migraciones compilados
+migrations/**/__pycache__/
+
+# Archivos generados por el entorno virtual
+venv/
+env/
+*.venv
+
+# Archivos de logs
+*.log
+
+# Configuración de IDEs y editores de texto
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos estáticos y compilados
+staticfiles/
+media/
+
+# Archivos de Docker y despliegue (si los usas)
+*.dockerfile
+*.tar
+.env

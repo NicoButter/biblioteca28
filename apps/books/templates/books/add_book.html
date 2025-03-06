@@ -3,60 +3,64 @@
 {% load static %}
 
 {% block extra_style %}
-    <link rel="stylesheet" href="{% static 'css/add_book_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'books/css/add_book_styles.css' %}">
 {% endblock %}
 
 {% block content %}
 <h1>Agregar Libro</h1>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="form-container">
     {% csrf_token %}
     
-    <!-- Título del libro -->
-    <div class="form-row">
-        <label for="{{ form.title.id_for_label }}">Título</label>
-        {{ form.title }}
+    <!-- Contenedor para dos columnas -->
+    <div class="form-grid">
+        <!-- Columna 1 -->
+        <div class="form-column">
+            <div class="form-row">
+                <label for="{{ form.title.id_for_label }}">Título</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.authors.id_for_label }}">Autor(es)</label>
+                {{ form.authors }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.isbn.id_for_label }}">ISBN</label>
+                {{ form.isbn }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.publisher.id_for_label }}">Editorial</label>
+                {{ form.publisher }}
+            </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="form-column">
+            <div class="form-row">
+                <label for="{{ form.publication_year.id_for_label }}">Año de publicación</label>
+                {{ form.publication_year }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.genre.id_for_label }}">Género</label>
+                {{ form.genre }}
+                <label for="{{ form.other_genre.id_for_label }}">Otro</label>
+                {{ form.other_genre }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.language.id_for_label }}">Idioma</label>
+                {{ form.language }}
+            </div>
+        </div>
     </div>
 
-    <!-- Autor(es) -->
-    <div class="form-row">
-        <label for="{{ form.authors.id_for_label }}">Autor(es)</label>
-        {{ form.authors }}
+    <!-- Botón de guardar (span ambas columnas) -->
+    <div class="form-row full-width">
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
-
-    <!-- ISBN -->
-    <div class="form-row">
-        <label for="{{ form.isbn.id_for_label }}">ISBN</label>
-        {{ form.isbn }}
-    </div>
-
-    <!-- Editorial -->
-    <div class="form-row">
-        <label for="{{ form.publisher.id_for_label }}">Editorial</label>
-        {{ form.publisher }}
-    </div>
-
-    <!-- Año de publicación -->
-    <div class="form-row">
-        <label for="{{ form.publication_year.id_for_label }}">Año de publicación</label>
-        {{ form.publication_year }}
-    </div>
-
-    <!-- Género -->
-    <div class="form-row">
-        <label for="{{ form.genre.id_for_label }}">Género</label>
-        {{ form.genre }}
-        <label for="{{ form.other_genre.id_for_label }}">Otro</label>
-        {{ form.other_genre }}
-    </div>
-
-    <!-- Idioma -->
-    <div class="form-row">
-        <label for="{{ form.language.id_for_label }}">Idioma</label>
-        {{ form.language }}
-    </div>
-
-    <!-- Botón de guardar -->
-    <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 
 <a href="{% url 'employee_dashboard' %}">Volver al Dashboard</a>

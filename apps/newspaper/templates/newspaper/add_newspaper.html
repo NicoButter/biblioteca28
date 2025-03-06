@@ -1,11 +1,95 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_style %}
+    <link rel="stylesheet" href="{% static 'newspaper/css/add_newspaper_styles.css' %}">
+{% endblock %}
 
 {% block content %}
 <h1>Agregar Periódico</h1>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="form-container">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    
+    <!-- Contenedor para dos columnas -->
+    <div class="form-grid">
+        <!-- Columna 1 -->
+        <div class="form-column">
+            <div class="form-row">
+                <label for="{{ form.title.id_for_label }}">Título</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.publisher.id_for_label }}">Editorial</label>
+                {{ form.publisher }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.publication_date.id_for_label }}">Fecha de Publicación</label>
+                {{ form.publication_date }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.language.id_for_label }}">Idioma</label>
+                {{ form.language }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.genre.id_for_label }}">Género</label>
+                {{ form.genre }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.edition.id_for_label }}">Edición</label>
+                {{ form.edition }}
+            </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="form-column">
+            <div class="form-row">
+                <label for="{{ form.description.id_for_label }}">Descripción</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.cover_image.id_for_label }}">Portada</label>
+                {{ form.cover_image }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.status.id_for_label }}">Estado</label>
+                {{ form.status }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.physical_location.id_for_label }}">Ubicación Física</label>
+                {{ form.physical_location }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.issn.id_for_label }}">ISSN</label>
+                {{ form.issn }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.pages.id_for_label }}">Número de Páginas</label>
+                {{ form.pages }}
+            </div>
+
+            <div class="form-row">
+                <label for="{{ form.price.id_for_label }}">Precio</label>
+                {{ form.price }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de guardar (span ambas columnas) -->
+    <div class="form-row full-width">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    <a href="{% url 'employee_dashboard' %}" class="btn btn-secondary btn-block mt-3">Volver al Dashboard</a>
+
 </form>
-<a href="{% url 'employee_dashboard' %}">Volver al Dashboard</a>
+
 {% endblock %}

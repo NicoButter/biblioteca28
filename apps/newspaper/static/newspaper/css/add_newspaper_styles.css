@@ -1,6 +1,5 @@
-/* Estilos del formulario */
 .form-container {
-    max-width: 1200px;  /* Ajusta el ancho para dos columnas */
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -8,26 +7,22 @@
     background-color: #f9f9f9;
 }
 
-/* Diseño en dos columnas */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;  /* Dos columnas iguales */
-    gap: 20px;  /* Espacio entre columnas y filas */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-/* Estilos para cada columna */
 .form-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Filas individuales */
 .form-row {
     margin-bottom: 15px;
 }
 
-/* Ajustes para labels e inputs */
 form label {
     font-size: 1.1em;
     color: #333;
@@ -44,11 +39,17 @@ form textarea {
     font-size: 1em;
 }
 
-/* Botón de guardar (ocupa todo el ancho) */
+/* Estilos para el campo de descripción (textarea) */
+form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Estilos para el botón */
 .btn-primary {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
@@ -58,26 +59,12 @@ form textarea {
 }
 
 .btn-primary:hover {
-    background-color: #45a049;
-}
-
-/* Enlace de "Volver al Dashboard" */
-a {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #4CAF50;
-    font-size: 1.1em;
-}
-
-a:hover {
-    text-decoration: underline;
+    background-color: #218838;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .form-grid {
-        grid-template-columns: 1fr;  /* Una columna en pantallas pequeñas */
+        grid-template-columns: 1fr;
     }
 }

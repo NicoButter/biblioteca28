@@ -10,7 +10,6 @@
 <form method="post" enctype="multipart/form-data" class="form-container">
     {% csrf_token %}
     
-    <!-- Contenedor para dos columnas -->
     <div class="form-grid">
         <!-- Columna 1 -->
         <div class="form-column">
@@ -29,11 +28,20 @@
                 {{ form.publication_date }}
             </div>
 
+            <!-- Campo 'scope' (Alcance) -->
+            <div class="form-row">
+                <label for="{{ form.scope.id_for_label }}">Alcance</label>
+                {{ form.scope }}
+            </div>
+
             <div class="form-row">
                 <label for="{{ form.language.id_for_label }}">Idioma</label>
                 {{ form.language }}
             </div>
+        </div>
 
+        <!-- Columna 2 -->
+        <div class="form-column">
             <div class="form-row">
                 <label for="{{ form.genre.id_for_label }}">Género</label>
                 {{ form.genre }}
@@ -43,10 +51,7 @@
                 <label for="{{ form.edition.id_for_label }}">Edición</label>
                 {{ form.edition }}
             </div>
-        </div>
 
-        <!-- Columna 2 -->
-        <div class="form-column">
             <div class="form-row">
                 <label for="{{ form.description.id_for_label }}">Descripción</label>
                 {{ form.description }}
@@ -61,35 +66,15 @@
                 <label for="{{ form.status.id_for_label }}">Estado</label>
                 {{ form.status }}
             </div>
-
-            <div class="form-row">
-                <label for="{{ form.physical_location.id_for_label }}">Ubicación Física</label>
-                {{ form.physical_location }}
-            </div>
-
-            <div class="form-row">
-                <label for="{{ form.issn.id_for_label }}">ISSN</label>
-                {{ form.issn }}
-            </div>
-
-            <div class="form-row">
-                <label for="{{ form.pages.id_for_label }}">Número de Páginas</label>
-                {{ form.pages }}
-            </div>
-
-            <div class="form-row">
-                <label for="{{ form.price.id_for_label }}">Precio</label>
-                {{ form.price }}
-            </div>
         </div>
     </div>
 
-    <!-- Botón de guardar (span ambas columnas) -->
+    <!-- Botón de guardar y enlace de retorno -->
     <div class="form-row full-width">
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
-    <a href="{% url 'employee_dashboard' %}" class="btn btn-secondary btn-block mt-3">Volver al Dashboard</a>
-
+    <div class="form-row full-width">
+        <a href="{% url 'employee_dashboard' %}" class="btn btn-secondary back-link">Volver al Dashboard</a>
+    </div>
 </form>
-
 {% endblock %}

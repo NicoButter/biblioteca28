@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('add/', views.add_newspaper, name='add_newspaper'),
+    path('search/', views.NewspaperSearchView, name='newspaper_search'),
 ]

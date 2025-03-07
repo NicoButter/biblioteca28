@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block extra_style %}
@@ -7,13 +6,12 @@
 {% endblock %}
 
 {% block content %}
-
 <h1>Bienvenido, Empleado</h1>
 <p>Selecciona una opción:</p>
 
 <div class="row">
-
-    <div class="col-md-6">
+    <!-- Tarjeta para Cargar Libros -->
+    <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">Cargar Libro</h5>
@@ -23,7 +21,8 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <!-- Tarjeta para Cargar Periódicos -->
+    <div class="col-md-4">
         <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">Cargar Periódico</h5>
@@ -32,6 +31,18 @@
             </div>
         </div>
     </div>
-</div>
 
+    <!-- Nueva Tarjeta para Buscar Periódicos -->
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Buscar Periódico</h5>
+                <p class="card-text">Encuentra periódicos por título, alcance o género.</p>
+                <a href="{% url 'newspaper_search' %}" class="btn btn-info">
+                    <i class="fas fa-search"></i> Ir a Buscar Periódico
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

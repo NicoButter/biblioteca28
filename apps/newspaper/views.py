@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.db.models import Q
 from .models import Newspaper
+from django.utils.decorators import method_decorator
 
+# -----------------------------------------------------------------------------------------------------------------------------
 
 @login_required
 def add_newspaper(request):
@@ -19,23 +21,21 @@ def add_newspaper(request):
 
 # -----------------------------------------------------------------------------------------------------------------------------
 
-@login_required
+@method_decorator(login_required, name='dispatch')
 class NewspaperSearchView(ListView):
     model = Newspaper
-    template_name = 'newspapers/newspaper_search.html'
+    template_name = 'newspaper/newspaper_search.html'
     context_object_name = 'newspapers'
-    paginate_by = 10  # Paginación opcional
+    paginate_by = 10
 
     def get_queryset(self):
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
         query = self.request.GET.get('q')
         scope = self.request.GET.get('scope')
         genre = self.request.GET.get('genre')
         status = self.request.GET.get('status')
-
-        # Consulta base
         queryset = super().get_queryset()
-
-        # Filtros
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) | 
@@ -48,7 +48,8 @@ class NewspaperSearchView(ListView):
             queryset = queryset.filter(genre=genre)
         if status:
             queryset = queryset.filter(status=status)
-        
+        if start_date and end_date:
+            queryset = queryset.filter(publication_date__range=[start_date, end_date])
         return queryset
 
     def get_context_data(self, **kwargs):

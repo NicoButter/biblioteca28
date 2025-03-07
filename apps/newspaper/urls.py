@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import add_newspaper, NewspaperSearchView
 
 urlpatterns = [
-    path('add/', views.add_newspaper, name='add_newspaper'),
-    path('search/', views.NewspaperSearchView, name='newspaper_search'),
+    path('add/', add_newspaper, name='add_newspaper'),
+    path('search/', NewspaperSearchView.as_view(), name='newspaper_search'),
 ]

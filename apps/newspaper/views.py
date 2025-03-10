@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import NewspaperForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from django.db.models import Q
+from django.db.models import Q, Count
 from .models import Newspaper
 from django.utils.decorators import method_decorator
 
@@ -35,7 +35,9 @@ class NewspaperSearchView(ListView):
         scope = self.request.GET.get('scope')
         genre = self.request.GET.get('genre')
         status = self.request.GET.get('status')
+        
         queryset = super().get_queryset()
+        queryset = queryset.annotate(cardex_count=Count('cardex_entries'))
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) | 

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h1>Agregar Ficha Cardex para {{ newspaper.title }}</h1>
+<form method="post" class="form-container">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Guardar Ficha</button>
+</form>
+<a href="{% url 'newspaper_search' %}" class="btn btn-secondary mt-3">Volver a la Búsqueda</a>
+{% endblock %}

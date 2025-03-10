@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "apps.accounts",
     "apps.books",
     "apps.newspaper",
-    "apps.dashboards"
+    "apps.dashboards",
+    "apps.cardex",
 ]
 
 MIDDLEWARE = [

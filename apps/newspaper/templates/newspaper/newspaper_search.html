@@ -66,6 +66,7 @@
             <th>Alcance</th>
             <th>Género</th>
             <th>Estado</th>
+            <th>Ficha Cardex</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -78,6 +79,15 @@
             <td>{{ newspaper.get_scope_display }}</td>
             <td>{{ newspaper.get_genre_display }}</td>
             <td>{{ newspaper.get_status_display }}</td>
+            <td>
+                {% if newspaper.cardex_count > 0 %}
+                    <span class="badge bg-success">Completo</span>
+                {% else %}
+                    <a href="{% url 'add_cardex' newspaper_id=newspaper.id %}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-plus"></i> Agregar Ficha
+                    </a>
+                {% endif %}
+            </td>
             <td>
                 <a href="{% url 'newspaper_detail' pk=newspaper.id %}" class="btn btn-info">Ver</a>
                 <a href="{% url 'newspaper_update' pk=newspaper.id %}" class="btn btn-warning">Editar</a>

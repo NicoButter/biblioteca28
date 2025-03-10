@@ -4,7 +4,6 @@ def newspaper_cover_path(instance, filename):
     return f'newspapers/newspaper_{instance.id}/{filename}'
 
 class Newspaper(models.Model):
-    # Definir STATUS_CHOICES antes de usarlo
     STATUS_CHOICES = [
         ('available', 'Disponible'),
         ('borrowed', 'Prestado'),
@@ -47,7 +46,6 @@ class Newspaper(models.Model):
         verbose_name="Género"
     )
 
-    # Resto de los campos
     edition = models.CharField(max_length=100, blank=True, null=True, verbose_name="Edition")
     description = models.TextField(blank=True, null=True, verbose_name="Description")
     cover_image = models.ImageField(upload_to=newspaper_cover_path, blank=True, null=True, verbose_name="Cover Image")

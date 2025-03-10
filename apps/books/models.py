@@ -1,8 +1,7 @@
 from django.db import models
 
 def book_cover_path(instance, filename):
-    # Generates a path like: books/covers/book_<id>/cover.jpg
-    return f'books/covers/book_{instance.id}/{filename}'
+    return f'books/book_{instance.id}/{filename}'
 
 class Book(models.Model):
     # General Information

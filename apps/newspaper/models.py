@@ -1,7 +1,13 @@
+import os
 from django.db import models
+from django.conf import settings  # Importa settings para acceder a MEDIA_ROOT
 
 def newspaper_cover_path(instance, filename):
-    return f'newspapers/newspaper_{instance.id}/{filename}'
+    # Usa 'temp' si el ID no existe, o el ID real si ya está guardado
+    if instance.id:
+        return f'newspapers/newspaper_{instance.id}/{filename}'
+    else:
+        return f'newspapers/temp/{filename}'
 
 class Newspaper(models.Model):
     STATUS_CHOICES = [
@@ -10,7 +16,6 @@ class Newspaper(models.Model):
         ('under_repair', 'En Reparación'),
     ]
 
-    # Alcance geográfico
     SCOPE_CHOICES = [
         ('nacional', 'Nacional'),
         ('provincial', 'Provincial'),
@@ -23,13 +28,11 @@ class Newspaper(models.Model):
         verbose_name="Alcance"
     )
 
-    # Información General
     title = models.CharField(max_length=255, verbose_name="Title")
     publisher = models.CharField(max_length=100, verbose_name="Publisher")
     publication_date = models.DateField(verbose_name="Publication Date")
     language = models.CharField(max_length=50, verbose_name="Language")
 
-    # Género
     GENRE_CHOICES = [
         ('noticias', 'Noticias'),
         ('deportes', 'Deportes'),
@@ -51,7 +54,7 @@ class Newspaper(models.Model):
     cover_image = models.ImageField(upload_to=newspaper_cover_path, blank=True, null=True, verbose_name="Cover Image")
     status = models.CharField(
         max_length=20,
-        choices=STATUS_CHOICES,  # Ahora STATUS_CHOICES está definido
+        choices=STATUS_CHOICES,
         default='available',
         verbose_name="Status"
     )
@@ -66,3 +69,35 @@ class Newspaper(models.Model):
     class Meta:
         verbose_name = "Newspaper"
         verbose_name_plural = "Newspapers"
+
+    def save(self, *args, **kwargs):
+        # Primero guarda el periódico para obtener un ID
+        super().save(*args, **kwargs)
+        
+        if self.cover_image and 'temp' in self.cover_image.path:
+            # Define la nueva ruta con el ID real
+            new_dir = f'newspapers/newspaper_{self.id}'
+            new_filename = os.path.basename(self.cover_image.name)  # Nombre original del archivo
+            new_path = os.path.join(new_dir, new_filename)
+            
+            # Crea el directorio si no existe
+            os.makedirs(os.path.join(settings.MEDIA_ROOT, new_dir), exist_ok=True)
+            
+            # Obtiene la ruta antigua y nueva
+            old_file_path = self.cover_image.path
+            new_file_path = os.path.join(settings.MEDIA_ROOT, new_path)
+            
+            # Mueve el archivo
+            os.rename(old_file_path, new_file_path)
+            
+            # Actualiza el campo cover_image con la nueva ruta
+            self.cover_image.name = new_path
+            super().save(update_fields=['cover_image'])  # Guarda solo el campo modificado
+            
+            # Elimina el directorio temporal si está vacío
+            try:
+                temp_dir = os.path.dirname(old_file_path)
+                if not os.listdir(temp_dir):
+                    os.rmdir(temp_dir)
+            except OSError:
+                pass

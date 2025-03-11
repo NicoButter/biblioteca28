@@ -135,15 +135,16 @@ AUTH_USER_MODEL = 'accounts.Usuario'
 # Directorio para archivos estáticos
 STATIC_URL = '/static/'
 
-# Archivos multimedia (imágenes, PDFs, etc.)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Directorios donde Django buscará archivos estáticos
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'apps/accounts/static'),
 ]
+
+# Archivos multimedia (imágenes, PDFs, etc.)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

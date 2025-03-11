@@ -11,10 +11,13 @@ from django.utils.decorators import method_decorator
 @login_required
 def add_newspaper(request):
     if request.method == 'POST':
+        print("Archivos recibidos:", request.FILES)  # Verifica qué archivos llegan
         form = NewspaperForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('employee_dashboard')
+        else:
+            print("Errores del formulario:", form.errors)  # Para ver si hay errores en los campos
     else:
         form = NewspaperForm()
     return render(request, 'newspaper/add_newspaper.html', {'form': form})

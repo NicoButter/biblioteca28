@@ -1,12 +1,10 @@
 import os
+import shutil
 from django.db import models
-from django.conf import settings  
+from django.conf import settings
 
 def newspaper_cover_path(instance, filename):
-    if instance.id:
-        return f'newspapers/newspaper_{instance.id}/{filename}'
-    else:
-        return f'newspapers/temp/{filename}'
+    return f'newspapers/temp/{filename}'
 
 class Newspaper(models.Model):
     STATUS_CHOICES = [
@@ -70,26 +68,28 @@ class Newspaper(models.Model):
         verbose_name_plural = "Newspapers"
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        
-        if self.cover_image and 'temp' in self.cover_image.path:
-            new_dir = f'newspapers/newspaper_{self.id}'
-            new_filename = os.path.basename(self.cover_image.name)  # Nombre original del archivo
-            new_path = os.path.join(new_dir, new_filename)
+        """ Sobrescribe el método save para mover la imagen a la carpeta definitiva después de guardar """
+        super().save(*args, **kwargs)  # Guarda el objeto primero para obtener un ID
+
+        if self.cover_image and 'temp' in self.cover_image.name:
+            old_file_path = os.path.join(settings.MEDIA_ROOT, self.cover_image.name)
+            new_dir = os.path.join(settings.MEDIA_ROOT, f'newspapers/newspaper_{self.id}')
+            new_filename = os.path.basename(self.cover_image.name)
+            new_file_path = os.path.join(new_dir, new_filename)
+
+            # Asegurar que el directorio de destino existe
+            os.makedirs(new_dir, exist_ok=True)
+
+            # Mover el archivo si existe
+            if os.path.exists(old_file_path):
+                shutil.move(old_file_path, new_file_path)
+                self.cover_image.name = f'newspapers/newspaper_{self.id}/{new_filename}'
+                super().save(update_fields=['cover_image'])  # Guarda nuevamente solo el campo cover_image
             
-            os.makedirs(os.path.join(settings.MEDIA_ROOT, new_dir), exist_ok=True)
-            
-            old_file_path = self.cover_image.path
-            new_file_path = os.path.join(settings.MEDIA_ROOT, new_path)
-            
-            os.rename(old_file_path, new_file_path)
-            
-            self.cover_image.name = new_path
-            super().save(update_fields=['cover_image'])  
-            
+            # Intentar eliminar el directorio temporal si está vacío
+            temp_dir = os.path.dirname(old_file_path)
             try:
-                temp_dir = os.path.dirname(old_file_path)
-                if not os.listdir(temp_dir):
+                if os.path.exists(temp_dir) and not os.listdir(temp_dir):
                     os.rmdir(temp_dir)
             except OSError:
                 pass

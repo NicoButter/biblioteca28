@@ -31,7 +31,8 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('books/', include('apps.books.urls')),
     path('newspaper/', include('apps.newspaper.urls')),
-    path('dashboard/', include('apps.dashboards.urls')), 
+    path('dashboard/', include('apps.dashboards.urls')),
+    path('cardex/', include('apps.cardex.urls')),
 ]
 
 if settings.DEBUG:

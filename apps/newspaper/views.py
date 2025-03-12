@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewspaperForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
@@ -66,3 +66,10 @@ class NewspaperSearchView(ListView):
         return context
     
 # -----------------------------------------------------------------------------------------------------------------------------
+
+@login_required
+def newspaper_detail(request, pk):
+    newspaper = get_object_or_404(Newspaper, pk=pk)
+    
+    return render(request, 'newspaper/newspaper_detail.html', {'newspaper': newspaper})
+

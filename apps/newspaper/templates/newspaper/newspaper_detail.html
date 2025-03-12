@@ -1,0 +1,26 @@
+<!-- templates/newspaper/newspaper_detail.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="newspaper-detail">
+    <h1>{{ newspaper.title }}</h1>
+    <p><strong>Publisher:</strong> {{ newspaper.publisher }}</p>
+    <p><strong>Publication Date:</strong> {{ newspaper.publication_date }}</p>
+    <p><strong>Language:</strong> {{ newspaper.language }}</p>
+    <p><strong>Genre:</strong> {{ newspaper.get_genre_display }}</p>
+    <p><strong>Scope:</strong> {{ newspaper.get_scope_display }}</p>
+    <p><strong>Status:</strong> {{ newspaper.get_status_display }}</p>
+    <p><strong>Description:</strong> {{ newspaper.description }}</p>
+    <p><strong>ISSN:</strong> {{ newspaper.issn }}</p>
+    <p><strong>Pages:</strong> {{ newspaper.pages }}</p>
+    <p><strong>Price:</strong> ${{ newspaper.price }}</p>
+
+    {% if newspaper.cover_image %}
+      <img src="{{ newspaper.cover_image.url }}" alt="Cover image" class="cover-image">
+    {% endif %}
+
+    <p><strong>Physical Location:</strong> {{ newspaper.physical_location }}</p>
+  </div>
+
+  <a href="{% url 'newspaper_search' %}">Back to search</a>
+{% endblock %}

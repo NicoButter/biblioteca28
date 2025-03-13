@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +15,15 @@
 </head>
 <body>
     <header>
-        <h1>Bienvenido a la Biblioteca 28 de Noviembre</h1>
-        <nav>
-            <a href="{% url 'home' %}">Inicio</a>
-            {% comment %} <a href="{% url 'logout' %}">Cerrar Sesión</a> hay que ver como hago para hacer esto{% endcomment %}
-        </nav>
+        <div class="header-left">
+            <p>Bienvenido <span>{{ user.username }}</span></p>
+        </div>
+        <div class="header-center">
+            <span>{{ page_title }}</span>
+        </div>
+        <div class="header-right">
+            <a href="{% url 'logout' %}">Salir</a>
+        </div>
     </header>
     <main>
         {% block content %}

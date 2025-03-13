@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth import logout
+
 
 def custom_login(request):
     if request.method == 'POST':
@@ -18,3 +20,7 @@ def custom_login(request):
         else:
             return render(request, 'accounts/login.html', {'error': 'Credenciales inválidas'})
     return render(request, 'accounts/login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')

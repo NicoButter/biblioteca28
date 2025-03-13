@@ -5,19 +5,21 @@ from django.views.generic import ListView
 from django.db.models import Q, Count
 from .models import Newspaper
 from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 # -----------------------------------------------------------------------------------------------------------------------------
 
 @login_required
 def add_newspaper(request):
     if request.method == 'POST':
-        print("Archivos recibidos:", request.FILES)  # Verifica qué archivos llegan
+        print("Archivos recibidos:", request.FILES) 
         form = NewspaperForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('employee_dashboard')
         else:
-            print("Errores del formulario:", form.errors)  # Para ver si hay errores en los campos
+            print("Errores del formulario:", form.errors)
     else:
         form = NewspaperForm()
     return render(request, 'newspaper/add_newspaper.html', {'form': form})
@@ -73,3 +75,9 @@ def newspaper_detail(request, pk):
     
     return render(request, 'newspaper/newspaper_detail.html', {'newspaper': newspaper})
 
+# ------------------------------------------------------------------------------------------------------------------------------
+
+class NewspaperUpdateView(UpdateView):
+    model = Newspaper
+    fields = ['title', 'publisher', 'publication_date', 'scope', 'genre', 'status']
+    template_name = 'newspaper/newspaper_form.html'

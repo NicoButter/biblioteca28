@@ -107,7 +107,7 @@
                 {% endif %}
             </td>
             <td>
-                <a href="{% url 'newspaper_detail' pk=newspaper.id %}" class="btn btn-info">Ver</a>
+                {% comment %} <a href="{% url 'newspaper_detail' pk=newspaper.id %}" class="btn btn-info">Ver</a> {% endcomment %}
                 <a href="{% url 'newspaper_update' pk=newspaper.id %}" class="btn btn-warning">Editar</a>
             </td>
         </tr>

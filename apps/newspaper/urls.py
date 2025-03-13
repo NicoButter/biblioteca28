@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import add_newspaper, NewspaperSearchView, newspaper_detail
+from . import views
 
 urlpatterns = [
-    path('add/', add_newspaper, name='add_newspaper'),
-    path('search/', NewspaperSearchView.as_view(), name='newspaper_search'),
-    path('<int:pk>/', newspaper_detail, name='newspaper_detail'),
+    path('add/', views.add_newspaper, name='add_newspaper'),
+    path('search/', views.NewspaperSearchView.as_view(), name='newspaper_search'),
+    path('update/<int:pk>/', views.NewspaperUpdateView.as_view(), name='newspaper_update'),
 
 ]

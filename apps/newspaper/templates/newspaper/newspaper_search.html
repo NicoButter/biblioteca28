@@ -52,6 +52,24 @@
                 <option value="under_repair" {% if status == 'under_repair' %}selected{% endif %}>En Reparación</option>
             </select>
         </div>
+
+        <!-- Filtros de fecha -->
+        <div class="col-md-2">
+            <input 
+                type="date" 
+                name="start_date" 
+                value="{{ start_date }}"
+                class="form-control"
+            >
+        </div>
+        <div class="col-md-2">
+            <input 
+                type="date" 
+                name="end_date" 
+                value="{{ end_date }}"
+                class="form-control"
+            >
+        </div>
     </div>
 </form>
 

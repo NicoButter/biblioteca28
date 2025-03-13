@@ -7,6 +7,8 @@ from .models import Newspaper
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
+from django.utils.dateparse import parse_date
+
 
 # -----------------------------------------------------------------------------------------------------------------------------
 
@@ -34,15 +36,18 @@ class NewspaperSearchView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        # Recuperar los parámetros de la URL (GET)
         start_date = self.request.GET.get('start_date')
         end_date = self.request.GET.get('end_date')
         query = self.request.GET.get('q')
         scope = self.request.GET.get('scope')
         genre = self.request.GET.get('genre')
         status = self.request.GET.get('status')
-        
+
         queryset = super().get_queryset()
         queryset = queryset.annotate(cardex_count=Count('cardex_entries'))
+
+        # Aplicar los filtros
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) | 
@@ -56,7 +61,11 @@ class NewspaperSearchView(ListView):
         if status:
             queryset = queryset.filter(status=status)
         if start_date and end_date:
-            queryset = queryset.filter(publication_date__range=[start_date, end_date])
+            start_date = parse_date(start_date)  # Parsear la fecha a un objeto de fecha
+            end_date = parse_date(end_date)
+            if start_date and end_date:
+                queryset = queryset.filter(publication_date__range=[start_date, end_date])
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -65,6 +74,8 @@ class NewspaperSearchView(ListView):
         context['scope'] = self.request.GET.get('scope', '')
         context['genre'] = self.request.GET.get('genre', '')
         context['status'] = self.request.GET.get('status', '')
+        context['start_date'] = self.request.GET.get('start_date', '')
+        context['end_date'] = self.request.GET.get('end_date', '')
         return context
     
 # -----------------------------------------------------------------------------------------------------------------------------
@@ -80,4 +91,4 @@ def newspaper_detail(request, pk):
 class NewspaperUpdateView(UpdateView):
     model = Newspaper
     fields = ['title', 'publisher', 'publication_date', 'scope', 'genre', 'status']
-    template_name = 'newspaper/newspaper_form.html'
+    template_name = 'newspaper/newspaper_update.html'

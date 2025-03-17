@@ -61,7 +61,7 @@ class Newspaper(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, verbose_name="Price")
 
     copete = models.CharField(
-        max_length=255,  # Ajusta la longitud según tus necesidades
+        max_length=255,
         blank=True,
         null=True,
         verbose_name="Copete"

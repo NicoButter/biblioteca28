@@ -10,72 +10,29 @@
 
 <!-- Formulario de Búsqueda -->
 <form method="get" class="search-form mb-4">
-    <div class="row">
+    <div class="search-container">
         <!-- Campo de búsqueda por texto -->
-        <div class="col-md-6">
+        <div class="search-input-container">
             <input 
                 type="text" 
                 name="q" 
                 placeholder="Buscar por título, editorial o descripción..." 
                 value="{{ query }}"
-                class="form-control"
+                class="search-input" 
+                aria-label="Buscar"
             >
         </div>
-
-        <!-- Filtro por Alcance -->
-        <div class="col-md-2">
-            <select name="scope" class="form-control">
-                <option value="">Alcance...</option>
-                <option value="nacional" {% if scope == 'nacional' %}selected{% endif %}>Nacional</option>
-                <option value="provincial" {% if scope == 'provincial' %}selected{% endif %}>Provincial</option>
-                <option value="regional" {% if scope == 'regional' %}selected{% endif %}>Regional</option>
-            </select>
-        </div>
-
-        <!-- Filtro por Género -->
-        <div class="col-md-2">
-            <select name="genre" class="form-control">
-                <option value="">Género...</option>
-                <option value="noticias" {% if genre == 'noticias' %}selected{% endif %}>Noticias</option>
-                <option value="deportes" {% if genre == 'deportes' %}selected{% endif %}>Deportes</option>
-                <option value="tecnologia" {% if genre == 'tecnologia' %}selected{% endif %}>Tecnología</option>
-                <option value="otros" {% if genre == 'otros' %}selected{% endif %}>Otros</option>
-            </select>
-        </div>
-
-        <!-- Filtro por Estado -->
-        <div class="col-md-2">
-            <select name="status" class="form-control">
-                <option value="">Estado...</option>
-                <option value="available" {% if status == 'available' %}selected{% endif %}>Disponible</option>
-                <option value="borrowed" {% if status == 'borrowed' %}selected{% endif %}>Prestado</option>
-                <option value="under_repair" {% if status == 'under_repair' %}selected{% endif %}>En Reparación</option>
-            </select>
-        </div>
-
-        <!-- Filtros de fecha -->
-        <div class="col-md-2">
-            <input 
-                type="date" 
-                name="start_date" 
-                value="{{ start_date }}"
-                class="form-control"
-            >
-        </div>
-        <div class="col-md-2">
-            <input 
-                type="date" 
-                name="end_date" 
-                value="{{ end_date }}"
-                class="form-control"
-            >
+        <div class="search-button-container">
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i> Buscar
+            </button>
         </div>
     </div>
 </form>
 
 <!-- Resultados -->
 {% if newspapers %}
-<table class="table mt-4">
+<table class="result-table mt-4">
     <thead>
         <tr>
             <th>Título</th>
@@ -99,16 +56,15 @@
             <td>{{ newspaper.get_status_display }}</td>
             <td>
                 {% if newspaper.cardex_count > 0 %}
-                    <span class="badge bg-success">Completo</span>
+                    <span class="badge-success">Completo</span>
                 {% else %}
-                    <a href="{% url 'add_cardex' newspaper_id=newspaper.id %}" class="btn btn-warning btn-sm">
+                    <a href="{% url 'add_cardex' newspaper_id=newspaper.id %}" class="btn-warning">
                         <i class="fas fa-plus"></i> Agregar Ficha
                     </a>
                 {% endif %}
             </td>
             <td>
-                {% comment %} <a href="{% url 'newspaper_detail' pk=newspaper.id %}" class="btn btn-info">Ver</a> {% endcomment %}
-                <a href="{% url 'newspaper_update' pk=newspaper.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'newspaper_update' pk=newspaper.id %}" class="btn-warning">Editar</a>
             </td>
         </tr>
         {% endfor %}
@@ -120,11 +76,11 @@
     {% if is_paginated %}
         <span>
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Anterior</a>
             {% endif %}
             <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Siguiente</a>
             {% endif %}
         </span>
     {% endif %}
@@ -135,5 +91,5 @@
 {% endif %}
 
 <!-- Enlace de retorno -->
-<a href="{% url 'employee_dashboard' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+<a href="{% url 'employee_dashboard' %}" class="btn-secondary">Volver al Dashboard</a>
 {% endblock %}

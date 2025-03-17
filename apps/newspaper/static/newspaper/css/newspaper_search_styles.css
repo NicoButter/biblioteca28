@@ -1,48 +1,126 @@
+/* Contenedor general para la barra de búsqueda */
 .search-form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
-.search-form input,
-.search-form select {
-    margin-bottom: 10px;
+/* Contenedor de los elementos dentro de la barra de búsqueda */
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px; /* Maximo tamaño de la barra */
 }
 
-.table {
+/* Estilos para el input de búsqueda */
+.search-input-container {
+    flex: 1;
+    padding-right: 10px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+}
+
+/* Estilos para el botón de búsqueda */
+.search-button-container {
+    flex-shrink: 0;
+}
+
+.search-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la tabla de resultados */
+.result-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 1rem;
 }
 
-.table th,
-.table td {
-    border: 1px solid #ddd;
+.result-table th, .result-table td {
     padding: 12px;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
-.table th {
+.result-table th {
+    background-color: #f2f2f2;
+}
+
+/* Estilo para los botones de acción */
+.btn-warning {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-warning:hover {
+    background-color: #ec971f;
+}
+
+/* Estilo para las etiquetas de estado */
+.badge-success {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Estilos para la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-link {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.pagination-link:hover {
     background-color: #007bff;
     color: white;
 }
 
-.table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.pagination a {
-    margin: 0 5px;
+/* Estilo para el botón de volver */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
     text-decoration: none;
-    color: #007bff;
 }
 
-.pagination a:hover {
-    text-decoration: underline;
+.btn-secondary:hover {
+    background-color: #5a6268;
 }

@@ -24,7 +24,7 @@ def add_newspaper(request):
             print("Errores del formulario:", form.errors)
     else:
         form = NewspaperForm()
-    return render(request, 'newspaper/add_newspaper.html', {'form': form})
+    return render(request, 'newspaper/add_newspaper.html', {'form': form},  )
 
 # -----------------------------------------------------------------------------------------------------------------------------
 

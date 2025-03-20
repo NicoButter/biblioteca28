@@ -6,6 +6,7 @@ class NewspaperForm(forms.ModelForm):
         model = Newspaper
         fields = [
             'title', 
+            'copete',
             'publisher', 
             'publication_date', 
             'language',

@@ -36,6 +36,7 @@
     <thead>
         <tr>
             <th>Título</th>
+            <th>Copete</th>
             <th>Editorial</th>
             <th>Fecha</th>
             <th>Alcance</th>
@@ -49,6 +50,7 @@
         {% for newspaper in newspapers %}
         <tr>
             <td>{{ newspaper.title }}</td>
+            <td>{{ newspaper.copete|default:"N/A" }}</td>
             <td>{{ newspaper.publisher }}</td>
             <td>{{ newspaper.publication_date }}</td>
             <td>{{ newspaper.get_scope_display }}</td>
